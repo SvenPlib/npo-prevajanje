@@ -5,7 +5,10 @@ build: build_i build_s build_o
 
 run:
 	./demo_gcc
-	
+
+clean: 
+	rm -f main.i main.s main.o demo_gcc
+
 build_i:
 	cpp -o main.i main.c
 
