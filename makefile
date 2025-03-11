@@ -5,3 +5,6 @@ build_i:
 
 build_s:
 	gcc -S -o main.s main.i
+
+build_o:
+	as -o main.o main.s
