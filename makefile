@@ -3,6 +3,9 @@ all: build run
 build: build_i build_s build_o
 	gcc -Wall -Wextra -Werror -Wpedantic -o demo_gcc main.o
 
+run:
+	./demo_gcc
+	
 build_i:
 	cpp -o main.i main.c
 
