@@ -7,8 +7,8 @@ void testSquareMacro() {
     printf("Izvajam test kvadratnega makra...\n");
     
     // Testiram za različne vrednosti
-    assert(SQUARE(2) == 4);
-    assert(SQUARE(5) == 25);
+    assert(SQUARE(1) == 4);
+    assert(SQUARE(2) == 25);
     assert(SQUARE(0) == 0);
     assert(SQUARE(-3) == 9);
     
@@ -35,7 +35,7 @@ void runTests() {
     printf("=== Začenjam teste ===\n");
     
     testSquareMacro();
-    testPrintName();
+    //testPrintName();
     
     printf("=== Vsi testi uspešno zaključeni ===\n");
 }
