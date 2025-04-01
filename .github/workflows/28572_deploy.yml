@@ -22,22 +22,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Ustvari Dockerfile, če ne obstaja
-        run: |
-          if [ ! -f Dockerfile ]; then
-            echo "Dockerfile ne obstaja, ustvarjam privzetega..."
-            cat > Dockerfile <<'EOF'
-            FROM gcc:latest
-            WORKDIR /app
-            COPY . .
-            RUN gcc -o test_program main.c test_main.c
-            CMD ["./test_program"]
-            EOF
-          fi
-
       - name: Zgradi docker sliko
         run: |
-          echo "docker build"
+          echo "Docker slika se gradi..."
           docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/cicd-projekt
 
       - name: Potisni docker sliko
@@ -47,4 +34,4 @@ jobs:
       - name: Izpiši povezavo do objavljenega zabojnika
         run: |
           echo "Zabojnik uspešno objavljen na DockerHub:"
-          echo "https://hub.docker.com/r/${{ secrets.DOCKERHUB_USERNAME }}/cicd-projekt"
+          echo "https://hub.docker.com/repositories/${{ secrets.DOCKERHUB_USERNAME }}/cicd-projekt"
