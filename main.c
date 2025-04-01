@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "test_main.h"  
 
 void printName(char name[]) {  
     printf("Hello %s\n", name);
@@ -18,5 +19,7 @@ int main() {
         printf("PI ni define\n");
     #endif
 
+    runTests();  
+    
     return 0;
 }
