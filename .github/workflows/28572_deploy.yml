@@ -31,8 +31,8 @@ jobs:
       - name: Zgradi docker sliko
         run: |
           echo "Docker slika se gradi..."
-          sudo docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/cicd-projekt:latest
+          sudo docker build . --file Dockerfile --tag svenplib/cicd-projekt:latest
 
       - name: Potisni docker sliko
         run: |
-          sudo docker push ${{ secrets.DOCKERHUB_USERNAME }}/cicd-projekt:latest
+          sudo docker push svenplib/cicd-projekt:latest
