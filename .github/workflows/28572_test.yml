@@ -1,13 +1,17 @@
 name: Testiranje kode
+
 on:
   push:
     branches: [master]
+
 jobs:
   check-tests:
     runs-on: self-hosted
+
     steps:
       - name: Kloniranje repozitorija
         uses: actions/checkout@v4
+
       - name: Preverjanje testnih datotek
         run: |
           if ls test_main.c 1> /dev/null 2> napaka.txt; then
@@ -17,6 +21,7 @@ jobs:
             exit 1
           fi
         continue-on-error: true
+
       - name: Shranjevanje artefaktov
         uses: actions/upload-artifact@v4
         with:
@@ -26,13 +31,16 @@ jobs:
   run-tests:
     needs: check-tests
     runs-on: self-hosted
+
     steps:
       - name: Kloniranje repozitorija
         uses: actions/checkout@v4
+        
       - name: Prenos artefaktov
         uses: actions/download-artifact@v4
         with:
           name: test-status
+
       - name: Preverjanje testnega statusa
         run: |
           if [ -s napaka.txt ] && grep -q "NAPAKA\|error\|Error" napaka.txt; then
@@ -40,13 +48,16 @@ jobs:
             cat napaka.txt
             exit 1
           fi
+
       - name: Priprava okolja za C
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential
+
       - name: Prevajanje kode
         run: |
           gcc -o test_program main.c test_main.c
+
       - name: Zagon testov
         run: |
           ./test_program

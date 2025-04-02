@@ -6,9 +6,8 @@
 void testSquareMacro() {
     printf("Izvajam test kvadratnega makra...\n");
     
-    // Testiram za različne vrednosti
-    assert(SQUARE(1) == 4);
-    assert(SQUARE(2) == 25);
+    assert(SQUARE(2) == 4);
+    assert(SQUARE(5) == 25);
     assert(SQUARE(0) == 0);
     assert(SQUARE(-3) == 9);
     
@@ -18,16 +17,20 @@ void testSquareMacro() {
 // Drugi test: preveri delovanje printName funkcije
 void testPrintName() {
     printf("Izvajam test printName funkcije...\n");
-    
-    // Ker printName samo izpiše v konzolo, je težko avtomatsko testirati
-    // Zato bomo le klicali funkcijo z nekaj primeri in ročno preverili izpis
-    printf("Pričakovan izpis: Hello Bob\n");
+
+    freopen("test_output.txt", "w", stdout);
     printName("Bob");
     
-    printf("Pričakovan izpis: Hello Testni Uporabnik\n");
-    printName("Testni Uporabnik");
+    // 2. Ponastavi izhod nazaj na konzolo
+    freopen("/dev/tty", "w", stdout);
     
-    printf("Test printName funkcije USPEŠEN! (preverite izpise ročno)\n");
+    char buffer[100];
+    FILE *f = fopen("test_output.txt", "r");
+    fgets(buffer, sizeof(buffer), f);
+    fclose(f);
+    
+    assert(strcmp(buffer, "Hello Bob\n") == 0);
+    printf("Test uspešen!\n");
 }
 
 // Glavna testna funkcija, ki kliče vse teste
@@ -35,7 +38,7 @@ void runTests() {
     printf("=== Začenjam teste ===\n");
     
     testSquareMacro();
-    //testPrintName();
+    testPrintName();
     
     printf("=== Vsi testi uspešno zaključeni ===\n");
 }
