@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 #include "test_main.h"
 
 // Prvi test: preveri vrednost makra SQUARE
