@@ -30,11 +30,11 @@ jobs:
       - name: Zgradi docker sliko
         run: |
           echo "Docker slika se gradi..."
-          docker build . --file Dockerfile --tag ${{ env.DOCKERHUB_USERNAME }}/cicd-projekt
+          sudo docker build . --file Dockerfile --tag ${{ env.DOCKERHUB_USERNAME }}/cicd-projekt
 
       - name: Potisni docker sliko
         run: |
-          docker push ${{ env.DOCKERHUB_USERNAME }}/cicd-projekt
+          sudo docker push ${{ env.DOCKERHUB_USERNAME }}/cicd-projekt
 
       - name: Izpiši povezavo do objavljenega zabojnika
         run: |
