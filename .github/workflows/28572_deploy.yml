@@ -1,9 +1,5 @@
 name: Zapakiraj in objavi Docker zabojnik
 
-
-env:
-  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 on:
   workflow_run:
     workflows: ["Testiranje kode"]
@@ -30,13 +26,8 @@ jobs:
       - name: Zgradi docker sliko
         run: |
           echo "Docker slika se gradi..."
-          sudo docker build . --file Dockerfile --tag sven/cicd-projekt:latest
+          sudo docker build . --file Dockerfile --tag svenplib/cicd-projekt:latest
 
       - name: Potisni docker sliko
         run: |
           sudo docker push svenplib/cicd-projekt:latest
-
-      - name: Izpiši povezavo do objavljenega zabojnika
-        run: |
-          echo "Zabojnik uspešno objavljen na DockerHub:"
-          echo "https://hub.docker.com/r/${{ env.DOCKERHUB_USERNAME }}/cicd-projekt"
