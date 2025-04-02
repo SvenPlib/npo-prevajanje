@@ -34,7 +34,7 @@ jobs:
 
       - name: Potisni docker sliko
         run: |
-          sudo docker push ${{ env.DOCKERHUB_USERNAME }}/cicd-projekt:latest
+          docker push ${{ env.DOCKERHUB_USERNAME }}/cicd-projekt:latest
 
       - name: Izpiši povezavo do objavljenega zabojnika
         run: |
