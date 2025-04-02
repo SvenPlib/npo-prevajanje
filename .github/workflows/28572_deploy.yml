@@ -25,4 +25,4 @@ jobs:
           registry: docker.io            
           dockerfile: Dockerfile
           tags: latest
-          image: ${{env.DOCKER_USERNAME}}/cicd-projekt
+          image: ${{secrets.DOCKERHUB_USERNAME}}/cicd-projekt
