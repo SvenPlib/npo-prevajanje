@@ -25,4 +25,3 @@ int main() {
 }
 
 // VRSTICA ZA TEST ČE DELA
-
