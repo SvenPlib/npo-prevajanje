@@ -31,6 +31,9 @@ jobs:
   run-tests:
     needs: check-tests
     runs-on: self-hosted
+    strategy:
+      matrix:
+        compiler: [gcc-9, gcc-10, gcc-11]
 
     steps:
       - name: Kloniranje repozitorija
@@ -56,7 +59,7 @@ jobs:
 
       - name: Prevajanje kode
         run: |
-          gcc -o test_program main.c test_main.c
+          ${{ matrix.compiler }} -o test_program main.c test_main.c
 
       - name: Zagon testov
         run: |
