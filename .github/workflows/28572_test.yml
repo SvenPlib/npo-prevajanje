@@ -27,18 +27,19 @@ jobs:
         with:
           name: test-status
           path: napaka.txt
-  
+
   run-tests:
     needs: check-tests
-    runs-on: self-hosted
     strategy:
       matrix:
-        compiler: [gcc-9, gcc-10, gcc-11]
+        gcc-version: [gcc-9, gcc-10, gcc-11]  # Različne verzije GCC
+
+    runs-on: self-hosted
 
     steps:
       - name: Kloniranje repozitorija
         uses: actions/checkout@v4
-        
+
       - name: Prenos artefaktov
         uses: actions/download-artifact@v4
         with:
@@ -57,9 +58,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential
 
-      - name: Prevajanje kode
+      - name: Namestitev GCC prevajalnika ${{ matrix.gcc-version }}
         run: |
-          ${{ matrix.compiler }} -o test_program main.c test_main.c
+          sudo apt-get install -y ${{ matrix.gcc-version }}
+
+      - name: Prevajanje kode z ${{ matrix.gcc-version }}
+        run: |
+          ${{ matrix.gcc-version }} -o test_program main.c test_main.c
 
       - name: Zagon testov
         run: |
